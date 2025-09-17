@@ -2,7 +2,7 @@ name: Deploy Front (SWA)
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
     paths:
       - "frontend/bayroumeter-frontend/**"
       - ".github/workflows/swa.yml"

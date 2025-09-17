@@ -2,7 +2,7 @@ name: CI/CD - API (Azure Functions)
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
     paths:
       - "api/**"
       - ".github/workflows/api-deploy.yml"
