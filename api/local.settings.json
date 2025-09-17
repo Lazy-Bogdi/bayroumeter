@@ -1,0 +1,8 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "CosmosDB": "AccountEndpoint=https://bayroudbbogdan1.documents.azure.com:443/;AccountKey=JKzc5KHVbMsjFTfib020ptNO2GXluJnR46boXE1akiRvL8gj3aSKqKMfXWPFbnmuPXuf9LYxldgxACDbrDSDVA==;"
+    }
+}

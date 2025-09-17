@@ -1,0 +1,25 @@
+# Exclure les configs locales
+local.settings.json
+.vscode/
+.git/
+.gitignore
+funcignore
+
+# Exclure les tests et docs
+test/
+tests/
+__tests__/
+docs/
+*.md
+
+# Exclure les types et outils de dev
+node_modules/@types/
+node_modules/azure-functions-core-tools/
+node_modules/typescript/
+*.ts
+*.tsbuildinfo
+*.js.map
+
+# Logs et cache
+npm-debug.log
+*.log

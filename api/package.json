@@ -1,0 +1,17 @@
+{
+    "name": "bayroumeter-api",
+    "version": "1.0.0",
+    "description": "Azure Functions for BayrouMeter",
+    "scripts": {
+        "start": "func start",
+        "test": "jest"
+    },
+    "dependencies": {
+        "@azure/cosmos": "^4.5.1",
+        "@azure/functions": "^4.0.0"
+    },
+    "devDependencies": {
+        "azure-functions-core-tools": "^4.x",
+        "jest": "^29.0.0"
+    }
+}
