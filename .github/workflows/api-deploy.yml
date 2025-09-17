@@ -39,4 +39,5 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           app-name: ${{ secrets.FUNCTIONAPP_NAME }}
-          package: "."
+          package: "${{ github.workspace }}/api"
+          respect-funcignore: true
