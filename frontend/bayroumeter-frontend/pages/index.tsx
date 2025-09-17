@@ -108,7 +108,7 @@ export default function Home() {
           <header className="mb-8">
             <h1 className="text-3xl font-semibold tracking-tight">🗳️ BayrouMeter</h1>
             <p className="text-neutral-400 mt-1">
-              Est-ce que François Bayrou vous manque&nbsp;?
+              Est-ce que François Bayrou vous manque&nbsp;???
             </p>
           </header>
 
