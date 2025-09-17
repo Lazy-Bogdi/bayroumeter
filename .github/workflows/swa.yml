@@ -17,12 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - run: npm ci
-      - run: npm run build
 
       - name: Deploy to Azure Static Web Apps (upload only)
         uses: Azure/static-web-apps-deploy@v1
@@ -32,4 +26,5 @@ jobs:
           output_location: ".next"
           action: "upload"
           production_branch: "master"
-          skip_app_build: true
+          api_location: ""
+          skip_api_build: true
