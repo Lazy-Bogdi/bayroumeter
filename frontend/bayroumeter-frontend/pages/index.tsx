@@ -61,8 +61,9 @@ export default function Home() {
 
       // autre erreur explicite
       if (!r.ok) throw new Error(data?.error || "Erreur");
-    } catch (e: any) {
-      setMsgUser(`Erreur: ${e?.message || e}`);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      setMsgUser(`Erreur: ${msg}`);
     }
   }
 
@@ -89,8 +90,9 @@ export default function Home() {
       }
 
       if (!r.ok) throw new Error(data?.error || "Erreur");
-    } catch (e: any) {
-      setMsgVote(`Erreur: ${e?.message || e}`);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      setMsgVote(`Erreur: ${msg}`);
     }
   }
 
