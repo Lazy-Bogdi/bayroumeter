@@ -20,6 +20,8 @@ jobs:
 
       - name: Deploy to Azure Static Web Apps (upload only)
         uses: Azure/static-web-apps-deploy@v1
+        env:
+          NEXT_PUBLIC_API_BASE: ${{ secrets.NEXT_PUBLIC_API_BASE }}
         with:
           azure_static_web_apps_api_token: ${{ secrets.SWA_TOKEN }}
           app_location: "frontend/bayroumeter-frontend"
