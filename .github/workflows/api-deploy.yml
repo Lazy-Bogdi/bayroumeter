@@ -1,42 +1,42 @@
-name: CI/CD - API (Azure Functions)
+name: CI/CD - API (Azure Functions) # Nom du workflow affiché dans GitHub Actions
 
 on:
-  push:
-    branches: ["master"]
-    paths:
-      - "api/**"
-      - ".github/workflows/api-deploy.yml"
+  push: # Déclencheur : exécution à chaque push sur certaines branches/fichiers
+    branches: ["master"] # uniquement si le push concerne la branche "master"
+    paths: # et uniquement si ces fichiers changent
+      - "api/**" # → tout le dossier api/
+      - ".github/workflows/api-deploy.yml" # → ou ce workflow lui-même
 
 jobs:
-  build-test-deploy:
-    runs-on: ubuntu-latest
+  build-test-deploy: # Nom du job principal
+    runs-on: ubuntu-latest # Runner GitHub : VM Linux prête à l’emploi
     defaults:
       run:
-        working-directory: api
+        working-directory: api # Toutes les commandes `run:` se font dans le dossier /api
 
-    steps:
+    steps: # Liste des étapes du job
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Récupère le code source du repo
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # Installe Node.js
         with:
-          node-version: "20"
+          node-version: "20" # Version utilisée (20 = LTS récente)
 
       - name: Install deps
-        run: npm ci
+        run: npm ci # Installe les dépendances de package-lock.json
 
       - name: Run unit tests
-        run: npm test
+        run: npm test # Exécute les tests Jest définis dans le projet API
 
       - name: Azure Login (RBAC)
-        uses: azure/login@v1
+        uses: azure/login@v1 # Action pour se connecter à Azure
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }} # JSON du service principal (stocké en secret GitHub)
 
       - name: Deploy to Azure Functions
-        uses: Azure/functions-action@v1
+        uses: Azure/functions-action@v1 # Action officielle pour déployer une Function App
         with:
-          app-name: ${{ secrets.FUNCTIONAPP_NAME }}
-          package: "${{ github.workspace }}/api"
-          respect-funcignore: true
+          app-name: ${{ secrets.FUNCTIONAPP_NAME }} # Nom de l’Azure Function App
+          package: "${{ github.workspace }}/api" # Envoie uniquement le dossier api
+          respect-funcignore: true # Ignore les fichiers listés dans .funcignore
