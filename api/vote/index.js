@@ -10,6 +10,7 @@ module.exports = async function (context, req) {
 
     if (!userId || !["Oui", "Non"].includes(choice)) {
         ai?.trackEvent({ name: "vote_cast", properties: { status: "bad_request" } });
+        ai?.flush();
         return { status: 400, body: { error: "userId and choice (Oui|Non) are required" } };
     }
 
@@ -21,6 +22,7 @@ module.exports = async function (context, req) {
                 name: "vote_cast",
                 properties: { status: "forbidden_user_missing", userIdHash: hashId(userId) }
             });
+            ai?.flush();
             return { status: 403, body: { error: "User not registered" } };
         }
     } catch (e) {
@@ -29,10 +31,12 @@ module.exports = async function (context, req) {
                 name: "vote_cast",
                 properties: { status: "forbidden_user_missing", userIdHash: hashId(userId) }
             });
+            ai?.flush();
             return { status: 403, body: { error: "User not registered" } };
         }
         context.log.error("Read user error:", e);
         ai?.trackEvent({ name: "vote_cast", properties: { status: "db_read_error" } });
+        ai?.flush();
         return { status: 500, body: { error: "DB read error" } };
     }
 
@@ -43,5 +47,6 @@ module.exports = async function (context, req) {
         name: "vote_cast",
         properties: { status: "created", choice, userIdHash: hashId(userId) }
     });
+    ai?.flush();
     return { status: 201, body: vote };
 };

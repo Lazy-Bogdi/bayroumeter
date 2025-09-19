@@ -10,6 +10,7 @@ module.exports = async function (context, req) {
 
     if (!pseudo || !email) {
         ai?.trackEvent({ name: "user_signup", properties: { status: "bad_request" } });
+        ai?.flush();
         return { status: 400, body: { error: "pseudo and email are required" } };
     }
 
@@ -21,6 +22,7 @@ module.exports = async function (context, req) {
                 name: "user_signup",
                 properties: { status: "exists", userIdHash: hashId(email) }
             });
+            ai?.flush();
             return {
                 status: 200,
                 body: { exists: true, message: "User already exists", user: existing }
@@ -34,6 +36,7 @@ module.exports = async function (context, req) {
                 name: "user_signup",
                 properties: { status: "db_read_error" }
             });
+            ai?.flush();
             return { status: 500, body: { error: "DB read error" } };
         }
     }
@@ -45,6 +48,7 @@ module.exports = async function (context, req) {
         name: "user_signup",
         properties: { status: "created", userIdHash: hashId(email) }
     });
+    ai?.flush();
 
     return { status: 201, body: user };
 };
