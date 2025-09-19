@@ -4,7 +4,7 @@
     "description": "Azure Functions for BayrouMeter",
     "scripts": {
         "start": "func start",
-        "test": "jest"
+        "test": "jest --runInBand"
     },
     "dependencies": {
         "@azure/cosmos": "^4.5.1",
@@ -14,5 +14,11 @@
     "devDependencies": {
         "azure-functions-core-tools": "^4.x",
         "jest": "^29.0.0"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "roots": [
+            "<rootDir>/__tests__"
+        ]
     }
 }

@@ -26,9 +26,8 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      # (optionnel) tests si tu en as pour l'API
-      # - name: Test
-      #   run: npm test
+      - name: Run unit tests
+        run: npm test
 
       - name: Azure Login (RBAC)
         uses: azure/login@v1
